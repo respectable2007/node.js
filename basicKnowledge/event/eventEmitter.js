@@ -1,1 +1,186 @@
-event模块，用来实现各种事件处理
+// 绑定事件处理函数
+// on/addListener
+var http=require('http')
+var server=http.createServer()
+
+// 为server服务器在接收到客户端请求时触发的request事件绑定事件处理函数
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.listen(1337,'127.0.0.1')
+
+// 可通过多个on方法对同一个事件绑定多个事件处理函数；
+// 一般情况下，针对同一个指定事件，最多可绑定10个事件处理函数
+// emitter.setMaxListeners(n)
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// })
+// server.listen(1337,"127.0.0.1")
+
+// 取得一个指定事件的所有事件处理函数时，可以使用listeners方法
+// emitter.listeners(event)
+// console.log(server.listeners('request'))
+
+// once方法也可指定事件绑定事件处理函数，但只会被执行一次
+// emitter.once(event,listener)
+// server.once('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.once('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// })
+// server.listen(1339,"127.0.0.1")
+
+// 解除某个事件处理函数
+// emitter.removeListener(event,listener)
+// var testFunction=function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// }
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('request',testFunction)
+// server.removeListener('request',testFunction)
+// server.listen(1337,"127.0.0.1")
+
+// 取消某个事件的所有已被指定事件处理函数或所有已被指定的事件处理函数
+// emitter.removeAllListeners(event)
+// var testFunction=function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// }
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('request',testFunction)
+// server.removeAllListeners('request')
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log("你好")
+// 	}
+// 	res.end()
+// })
+// server.listen(1337,"127.0.0.1")
+
+// 手工触发某个对象的一个事件
+// emitter.emit(event,[arg1],[arg2],[...])
+// 第一个参数值为需要手工触发的事件名，从第二个参数开始为需要传递给事件处理函数的参数
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('customEvent',function(arg1,arg2,arg3){
+// 	console.log('自定义事件被触发')
+// 	console.log(arg1)
+// 	console.log(arg2)
+// 	console.log(arg3)
+// })
+// server.emit('customEvent','1','2','3')
+// server.listen(1337,'127.0.0.1')
+
+// listenerCount，用来获取某个对象的指定事件的事件处理函数的数量
+// emitter.listenerCount(emitter,event)
+// var events=require('events')
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// })
+// server.listen(1337,'127.0.0.1')
+// console.log(events.EventEmitter.listenerCount(server,'request'))
+
+
+// newListener/removeListener事件
+// 对继承EventEmitter类的子类实例对象绑定事件处理函数时，将触发newListener事件
+// emitter.on('newListener',function(e,f){
+// 	// 事件处理函数代码
+// })
+// 对继承EventEmitter类的子类实例对象取消事件处理函数时，将触发removeListener事件
+// emitter.on('removeListener',function(e,f){
+// 	// 事件处理函数
+// })
+// server.on('removeListener',function(e,f){
+// 	console.log("对"+e+"事件取消事件处理函数")
+// 	console.log(f)
+// })
+// server.on('newListener',function(e,f){
+// 	console.log("对"+e+"事件添加事件处理函数")
+// 	console.log(f)
+// })
+// var testFunction=function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('发送响应完毕')
+// 	}
+// }
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log('接收到客户端请求')
+// 	}
+// })
+// server.on('request',function(req,res){
+// 	if(req.url!=='/favicon.ico'){
+// 		console.log(req.url)
+// 	}
+// 	res.end()
+// })
+// server.on('request',testFunction)
+// server.removeListener('request',testFunction)
+// server.listen(1337,"127.0.0.1")

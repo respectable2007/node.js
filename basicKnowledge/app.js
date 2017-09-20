@@ -124,4 +124,18 @@
 // __filename/__dirname变量
 // __filename，用来获取当前模块文件的带有完整绝对路径的文件名
 // __dirname，用来获取当前模块文件所在目录的完整绝对路径
-var test=require('./module/test.js')
+// var test=require('./module/test.js')
+
+// event模块(EventEmitter类)，用来实现各种事件处理
+// EventEmitter类的各种方法
+
+// 绑定事件处理函数
+// on/addListener
+// var http=require('http')
+// var server=http.createServer()
+// // 为server服务器在接收到客户端请求时触发的request事件绑定事件处理函数
+// server.on('request',function(req,res){
+// 	console.log(req.url)
+// 	res.end()
+// })
+// server.listen(1337,'127.0.0.1')
